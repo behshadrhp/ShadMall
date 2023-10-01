@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Internal App
-
+    'shop',
     # External App
     'debug_toolbar',
     'axes',

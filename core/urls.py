@@ -18,6 +18,7 @@ else:
 
 urlpatterns = [
     path(f'{ADMIN_DIRECTORY}/', admin.site.urls),
+    path('', include('shop.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
