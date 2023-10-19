@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}
+    {% if product %}{{ product.title }}{% else %}Product{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="{% if product.cover %}{{ product.cover.url }}{% else %}
+                {% static "img/product.jpeg" %}{% endif %}" class="img-fluid" alt="{{ product.title }}">
+        </div>
+        <div class="col-md-6">
+            <div class="product-detail">
+                <h1>{{ product.title }}</h1>
+                <h5>
+                    <a href="{{ product.category.get_absolute_url }}" style="text-decoration: none; color: rgba(150, 136, 136, 0.801);">
+                        {{ product.category }}
+                    </a>
+                </h5>
+                <p class="price">${{ product.price }}</p>
+                <p class="description">{{ product.description|linebreaks }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

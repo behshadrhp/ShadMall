@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
+from django.urls import reverse
 
 from utils.validator import english_character_regex
 
@@ -45,6 +46,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse('shop:product_detail', args=[self.slug])
+    
 
 
 class Category(models.Model):
@@ -76,3 +81,6 @@ class Category(models.Model):
 
     def __str__(self):
         return self.label
+
+    def get_absolute_url(self):
+        return reverse('shop:product_list_by_category', args=[self.slug])
