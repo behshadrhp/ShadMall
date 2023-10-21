@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Internal App
     'shop',
+    'cart',
     # External App
     'debug_toolbar',
     'axes',
@@ -137,5 +138,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
 
-# ُTimeOut system
+# TimeOut system
 TIMEOUT = 300
+
+CART_SESSION_ID = 'cart'

@@ -19,6 +19,7 @@ else:
 urlpatterns = [
     path(f'{ADMIN_DIRECTORY}/', admin.site.urls),
     path('', include('shop.urls', namespace='shop')),
+    path('cart/', include('cart.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
