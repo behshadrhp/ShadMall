@@ -21,6 +21,11 @@
                     </a>
                 </h5>
                 <p class="price">${{ product.price }}</p>
+                <form action="{% url "cart:cart_add" product.id %}" method="post">
+                    {{ cart_product_form }}
+                    {% csrf_token %}
+                    <input type="submit" value="Add to cart">
+                </form>
                 <p class="description">{{ product.description|linebreaks }}</p>
             </div>
         </div>
