@@ -27,15 +27,15 @@
         <tr>
           <td>
             <a href="{{ product.get_absolute_url }}">
-              <img src="{% if product.cover %}{{ product.cover.url }}{% else %}{% static "img/product.jpeg" %}{% endif %}" style='width: 9%;border-radius: 10%;'>
+              <img src="{% if product.cover %}{{ product.cover.url }}{% else %}{% static "img/product.jpeg" %}{% endif %}" style='width: 100px;border-radius: 10%;'>
             </a>
           </td>
-          <td>{{ product.name }}</td>
+          <td>{{ product.title }}</td>
           <td>{{ item.quantity }}</td>
           <td>
             <form action="{% url "cart:cart_remove" product.id %}" method="post">
-              <input type="submit" value="Remove">
               {% csrf_token %}
+              <input type="submit" class="btn btn-danger" value="Remove">
             </form>
           </td>
           <td class="num">${{ item.price }}</td>

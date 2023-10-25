@@ -20,13 +20,13 @@
                         {{ product.category }}
                     </a>
                 </h5>
-                <p class="price">${{ product.price }}</p>
-                <form action="{% url "cart:cart_add" product.id %}" method="post">
-                    {{ cart_product_form }}
-                    {% csrf_token %}
-                    <input type="submit" value="Add to cart">
-                </form>
                 <p class="description">{{ product.description|linebreaks }}</p>
+                <p class="price">price: ${{ product.price }}</p>
+                <form action="{% url "cart:cart_add" product.id %}" method="post">
+                    {% csrf_token %}
+                    {{ cart_product_form }}<br>
+                    <input type="submit" class="btn btn-primary" value="Add to cart">
+                </form>
             </div>
         </div>
     </div>

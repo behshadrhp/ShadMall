@@ -14,3 +14,8 @@ class CartAddProductForm(forms.Form):
         initial=False,
         widget=forms.HiddenInput
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+   
+        self.fields['quantity'].widget.attrs['class'] = 'form-select'
