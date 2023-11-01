@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     # Internal App
     'shop',
     'cart',
+    'order',
     # External App
     'debug_toolbar',
     'axes',
