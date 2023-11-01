@@ -58,7 +58,7 @@
           <h5 class="card-title">Summary</h5>
           <p class="card-text">Total Items: {{ total_items }}</p>
           <p class="card-text">Total Price: ${{ cart.get_total_price }}</p>
-          <a href="#" class="btn btn-primary">Checkout</a>
+          <a href="{% url 'order:order_create' %}" class="btn btn-primary">Checkout</a>
           <a href="{% url "shop:product_list" %}" class="btn btn-light">Continue Shopping</a>
         </div>
       </div>
