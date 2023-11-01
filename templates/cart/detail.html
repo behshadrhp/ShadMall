@@ -2,58 +2,74 @@
 {% load static %}
 
 {% block title %}
-    Your Shopping Cart
+  Your Shopping Cart
 {% endblock %}
 
-
 {% block content %}
-<div class="container">
-  <h1>Your shopping cart</h1>
-  <div class="table-responsive">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Product</th>
-          <th>Quantity</th>
-          <th>Remove</th>
-          <th>Unit price</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for item in cart %}
-        {% with product=item.product %}
-        <tr>
-          <td>
-            <a href="{{ product.get_absolute_url }}">
-              <img src="{% if product.cover %}{{ product.cover.url }}{% else %}{% static "img/product.jpeg" %}{% endif %}" style='width: 100px;border-radius: 10%;'>
-            </a>
-          </td>
-          <td>{{ product.title }}</td>
-          <td>{{ item.quantity }}</td>
-          <td>
-            <form action="{% url "cart:cart_remove" product.id %}" method="post">
-              {% csrf_token %}
-              <input type="submit" class="btn btn-danger" value="Remove">
-            </form>
-          </td>
-          <td class="num">${{ item.price }}</td>
-          <td class="num">${{ item.total_price }}</td>
-        </tr>
-        {% endwith %}
-        {% endfor %}
-        <tr class="total">
-          <td>Total</td>
-          <td colspan="4"></td>
-          <td class="num">${{ cart.get_total_price }}</td>
-        </tr>
-      </tbody>
-    </table>
+<div class="container my-5">
+  <h1 class="mb-4">Your Shopping Cart</h1>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Unit price</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart %}
+              {% with product=item.product %}
+                <tr>
+                  <td class="d-flex align-items-center">
+                    <div class="mr-3">
+                      <a href="{{ product.get_absolute_url }}">
+                        <img src="{% if product.cover %}{{ product.cover.url }}{% else %}{% static "img/product.jpeg" %}{% endif %}" style='width: 100px;border-radius: 10%;'>
+                      </a>
+                    </div>
+                    <div>
+                      {{ product.title }}
+                    </div>
+                  </td>
+                  <td>{{ item.quantity }}</td>
+                  <td>${{ item.price }}</td>
+                  <td>${{ item.total_price }}</td>
+                  <td>
+                    <form action="{% url "cart:cart_remove" product.id %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                    </form>
+                  </td>
+                </tr>
+              {% endwith %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Summary</h5>
+          <p class="card-text">Total Items: {{ total_items }}</p>
+          <p class="card-text">Total Price: ${{ cart.get_total_price }}</p>
+          <a href="#" class="btn btn-primary">Checkout</a>
+          <a href="{% url "shop:product_list" %}" class="btn btn-light">Continue Shopping</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="text-right">
-    <a href="{% url "shop:product_list" %}" class="btn btn-light">Continue shopping</a>
-    <a href="#" class="btn btn-primary">Checkout</a>
-  </div>
+
+  {% if total_items == 0 %}
+    <div class="mt-5 text-center">
+      <p>Your cart is empty.</p>
+      <a href="{% url "shop:product_list" %}" class="btn btn-primary">Start Shopping</a>
+    </div>
+  {% endif %}
 </div>
 {% endblock %}
