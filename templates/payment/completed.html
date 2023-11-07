@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block title %}Payment Successful{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 text-center">
+            <h1 class="mb-4">Your payment was successful</h1>
+            <p>Your payment has been processed successfully.</p>
+            <a href="{% url 'shop:product_list' %}" class="btn btn-primary mt-3">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

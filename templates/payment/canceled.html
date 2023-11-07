@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% block title %}Payment Canceled{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6 text-center">
+            <h1 class="mb-4">Your payment has not been processed</h1>
+            <p>There was a problem processing your payment.</p>
+            <a href="{% url 'shop:product_list' %}" class="btn btn-primary mt-3">Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

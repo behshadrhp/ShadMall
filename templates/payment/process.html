@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Pay your order{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Order Summary</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered" style='text-align: center;'>
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in order.items.all %}
+                <tr class="bg-light">
+                    <td>
+                        <img src="{% if item.product.cover %}{{ item.product.cover.url }}{% else %}{% static "img/product.jpeg" %}{% endif %}" class="img-fluid rounded" alt="{{ item.product.name }}" style='width: 210px;'>
+                    </td>
+                    <td class="align-middle">{{ item.product.title }}</td>
+                    <td class="num align-middle">${{ item.price }}</td>
+                    <td class="num align-middle">{{ item.quantity }}</td>
+                    <td class="num align-middle">${{ item.get_cost }}</td>
+                </tr>
+                {% endfor %}
+                <tr class="table-dark" style='text-align: center;'>
+                    <td colspan="4" class="text-end">Total</td>
+                    <td class="num">${{ order.get_total_cost }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <form action="{% url 'payment:process' %}" method="post">
+            <button type="submit" class="btn btn-primary">Pay Now</button>
+            {% csrf_token %}
+        </form>
+    </div>
+</div>
+{% endblock %}
