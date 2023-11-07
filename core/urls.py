@@ -21,6 +21,7 @@ urlpatterns = [
     path('', include('shop.urls', namespace='shop')),
     path('cart/', include('cart.urls')),
     path('order/', include('order.urls')),
+    path('payment/', include('payment.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'shop',
     'cart',
     'order',
+    'payment',
     # External App
     'debug_toolbar',
     'axes',
