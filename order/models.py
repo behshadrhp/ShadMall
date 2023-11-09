@@ -17,6 +17,9 @@ class Order(models.Model):
     city = models.CharField(max_length=100)
     paid = models.BooleanField(default=False)
 
+    # stripe webhooks id
+    stripe_id = models.CharField(max_length=250, blank=True)
+
     # create & update fields
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateField(auto_now=True)

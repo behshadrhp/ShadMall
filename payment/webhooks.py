@@ -42,6 +42,8 @@ def stripe_webhooks(request):
             
             # mark order as paid 
             order.paid = True
+            # store stripe payment IS
+            order.stripe_id = session.payment_intent
             order.save()
 
     return HttpResponse(status=200)
