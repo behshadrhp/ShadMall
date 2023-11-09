@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 from shop.models import Product
 
@@ -35,6 +36,19 @@ class Order(models.Model):
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
+    
+    def get_stripe_url(self):
+        if not self.stripe_id:
+            # no payment associated
+            return ''
+        if '__test__' in settings.STRIPE_SECRET_KEY:
+            # stripe path for test payment
+            path = '/test/'
+        else:
+            # stripe path for real payment
+            path = '/'
+
+        return f'https://dashboard.stripe.com{path}payments/{self.stripe_id}'
 
 
 class OrderItem(models.Model):
