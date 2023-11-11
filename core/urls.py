@@ -22,7 +22,7 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('order/', include('order.urls')),
     path('payment/', include('payment.urls')),
-    path('coupon/', include('coupon.urls')),
+    path('coupon/', include('coupon.urls', namespace='coupon')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
 from shop.models import Product
+from coupon.forms import CouponApplyForm
 from .cart import Cart
 from .forms import CartAddProductForm
 
@@ -44,6 +45,7 @@ class CartDetailView(View):
 
     def get(self, request):
         cart = Cart(request)
-        
-        context = {'cart': cart}
+        coupon_apply_form = CouponApplyForm()
+
+        context = {'cart': cart, 'coupon_apply_form': coupon_apply_form}
         return render(request, 'cart/detail.html', context)
